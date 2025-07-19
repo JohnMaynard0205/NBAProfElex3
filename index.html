@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Teams Database - Group 13</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏀</text></svg>">
+    <style>
+        /* NBA Teams Database - Modern CSS Styling */
+        /* Group 13 - NBA Teams */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            min-width: 300px;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Statistics Section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Teams Grid */
+        .teams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .team-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .team-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .team-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-location {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .team-details {
+            padding: 1.5rem;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .detail-value {
+            color: #7f8c8d;
+            text-align: right;
+        }
+
+        .championships-badge {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .team-description {
+            background: #f8f9fa;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            margin-top: 1rem;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .github-link {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .github-link:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-input {
+                min-width: auto;
+                margin-bottom: 1rem;
+            }
+            
+            .teams-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-select {
+                margin-bottom: 0.5rem;
+            }
+
+            .github-link {
+                position: relative;
+                top: auto;
+                right: auto;
+                display: block;
+                text-align: center;
+                margin: 1rem auto;
+                max-width: 200px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <a href="https://github.com" class="github-link" target="_blank">🐙 Deploy on GitHub</a>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🏀 NBA Teams Database</h1>
+            <p class="subtitle">Group 13 - Professional Basketball Teams Management System</p>
+            <p class="subtitle">Static Web Application - GitHub Pages Ready</p>
+            <p class="subtitle">Explore all <span id="total-teams">30</span> NBA teams with comprehensive information and search functionality</p>
+        </header>
+
+        <!-- Search Section -->
+        <div class="search-section">
+            <div class="search-container">
+                <input type="text" 
+                       id="search-input"
+                       class="search-input" 
+                       placeholder="Search teams by name, city, arena, coach, or description..." 
+                       onkeyup="handleSearch()">
+                <button type="button" class="search-btn" onclick="handleSearch()">🔍 Search</button>
+            </div>
+            
+            <div class="filter-container">
+                <label for="conference-filter">Conference:</label>
+                <select id="conference-filter" class="filter-select" onchange="applyFilters()">
+                    <option value="">All Conferences</option>
+                    <option value="Eastern">Eastern</option>
+                    <option value="Western">Western</option>
+                </select>
+                
+                <label for="division-filter">Division:</label>
+                <select id="division-filter" class="filter-select" onchange="applyFilters()">
+                    <option value="">All Divisions</option>
+                    <option value="Atlantic">Atlantic</option>
+                    <option value="Central">Central</option>
+                    <option value="Southeast">Southeast</option>
+                    <option value="Northwest">Northwest</option>
+                    <option value="Pacific">Pacific</option>
+                    <option value="Southwest">Southwest</option>
+                </select>
+                
+                <label for="sort-filter">Sort By:</label>
+                <select id="sort-filter" class="filter-select" onchange="applyFilters()">
+                    <option value="name">Team Name</option>
+                    <option value="championships">Championships</option>
+                    <option value="founded">Founded Year</option>
+                    <option value="city">City</option>
+                </select>
+                
+                <button class="reset-btn" onclick="resetFilters()">🔄 Reset Filters</button>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-section">
+            <h2>📊 League Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-total">30</div>
+                    <div class="stat-label">Total Teams</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-championships">0</div>
+                    <div class="stat-label">Total Championships</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-eastern">15</div>
+                    <div class="stat-label">Eastern Conference</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="stat-western">15</div>
+                    <div class="stat-label">Western Conference</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results-info" style="display: none;">
+            <div class="search-section" style="margin-bottom: 1rem; padding: 1rem;">
+                <h2 id="results-title">🔍 Search Results</h2>
+                <p id="results-count">0 team(s) found</p>
+            </div>
+        </div>
+
+        <!-- Teams Grid -->
+        <div id="teams-container">
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                Loading NBA Teams...
+            </div>
+            <div class="teams-grid" id="teams-grid" style="display: none;"></div>
+            <div class="no-results" id="no-results" style="display: none;">
+                <h2>🔍 No Teams Found</h2>
+                <p>No teams match your search criteria. Try adjusting your search terms or filters.</p>
+                <button class="reset-btn" onclick="resetFilters()">🔄 View All Teams</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // NBA Teams Data - Embedded for Static Site
+        const nbaTeams = [
+            {
+                id: 1,
+                team_name: 'Lakers',
+                city: 'Los Angeles',
+                conference: 'Western',
+                division: 'Pacific',
+                founded_year: 1947,
+                arena: 'Crypto.com Arena',
+                head_coach: 'Darvin Ham',
+                championships: 17,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/los-angeles-lakers-vector-logo.png',
+                team_colors: 'Purple, Gold',
+                description: 'One of the most successful franchises in NBA history with legendary players like Magic Johnson, Kareem Abdul-Jabbar, Kobe Bryant, and LeBron James.'
+            },
+            {
+                id: 2,
+                team_name: 'Celtics',
+                city: 'Boston',
+                conference: 'Eastern',
+                division: 'Atlantic',
+                founded_year: 1946,
+                arena: 'TD Garden',
+                head_coach: 'Joe Mazzulla',
+                championships: 17,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/boston-celtics-vector-logo.png',
+                team_colors: 'Green, White',
+                description: 'Historic franchise with the most championships tied with Lakers, known for their Big Three era and legendary players like Bill Russell and Larry Bird.'
+            },
+            {
+                id: 3,
+                team_name: 'Warriors',
+                city: 'Golden State',
+                conference: 'Western',
+                division: 'Pacific',
+                founded_year: 1946,
+                arena: 'Chase Center',
+                head_coach: 'Steve Kerr',
+                championships: 7,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/golden-state-warriors-vector-logo.png',
+                team_colors: 'Blue, Yellow',
+                description: 'Recent dynasty with Stephen Curry, Klay Thompson, and Draymond Green, revolutionizing basketball with their three-point shooting.'
+            },
+            {
+                id: 4,
+                team_name: 'Heat',
+                city: 'Miami',
+                conference: 'Eastern',
+                division: 'Southeast',
+                founded_year: 1988,
+                arena: 'FTX Arena',
+                head_coach: 'Erik Spoelstra',
+                championships: 3,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/miami-heat-vector-logo.png',
+                team_colors: 'Red, Black, White',
+                description: 'Known for their championship runs with LeBron James, Dwyane Wade, and Chris Bosh, and their strong organizational culture.'
+            },
+            {
+                id: 5,
+                team_name: 'Nets',
+                city: 'Brooklyn',
+                conference: 'Eastern',
+                division: 'Atlantic',
+                founded_year: 1967,
+                arena: 'Barclays Center',
+                head_coach: 'Jacque Vaughn',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/brooklyn-nets-vector-logo.png',
+                team_colors: 'Black, White',
+                description: 'Relocated from New Jersey, known for their star-studded roster attempts and modern approach to basketball.'
+            },
+            {
+                id: 6,
+                team_name: 'Knicks',
+                city: 'New York',
+                conference: 'Eastern',
+                division: 'Atlantic',
+                founded_year: 1946,
+                arena: 'Madison Square Garden',
+                head_coach: 'Tom Thibodeau',
+                championships: 2,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/new-york-knicks-vector-logo.png',
+                team_colors: 'Blue, Orange',
+                description: 'Historic franchise playing in the most famous arena, known for their passionate fanbase and legendary players like Walt Frazier and Patrick Ewing.'
+            },
+            {
+                id: 7,
+                team_name: '76ers',
+                city: 'Philadelphia',
+                conference: 'Eastern',
+                division: 'Atlantic',
+                founded_year: 1949,
+                arena: 'Wells Fargo Center',
+                head_coach: 'Nick Nurse',
+                championships: 3,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/philadelphia-76ers-vector-logo.png',
+                team_colors: 'Blue, Red, White',
+                description: 'Team with rich history including legends like Julius Erving, Allen Iverson, and current stars Joel Embiid and Tyrese Maxey.'
+            },
+            {
+                id: 8,
+                team_name: 'Raptors',
+                city: 'Toronto',
+                conference: 'Eastern',
+                division: 'Atlantic',
+                founded_year: 1995,
+                arena: 'Scotiabank Arena',
+                head_coach: 'Darko Rajaković',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/toronto-raptors-vector-logo.png',
+                team_colors: 'Red, Black, Silver',
+                description: "Canada's only NBA team, won their first championship in 2019 with Kawhi Leonard leading the way."
+            },
+            {
+                id: 9,
+                team_name: 'Bulls',
+                city: 'Chicago',
+                conference: 'Eastern',
+                division: 'Central',
+                founded_year: 1966,
+                arena: 'United Center',
+                head_coach: 'Billy Donovan',
+                championships: 6,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/chicago-bulls-vector-logo.png',
+                team_colors: 'Red, Black, White',
+                description: 'Legendary franchise of the 1990s with Michael Jordan, Scottie Pippen, and Phil Jackson winning six championships.'
+            },
+            {
+                id: 10,
+                team_name: 'Cavaliers',
+                city: 'Cleveland',
+                conference: 'Eastern',
+                division: 'Central',
+                founded_year: 1970,
+                arena: 'Rocket Mortgage FieldHouse',
+                head_coach: 'J.B. Bickerstaff',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/cleveland-cavaliers-vector-logo.png',
+                team_colors: 'Wine, Gold, Navy',
+                description: 'Brought Cleveland its first major sports championship in 52 years when LeBron James led them to victory in 2016.'
+            },
+            {
+                id: 11,
+                team_name: 'Pistons',
+                city: 'Detroit',
+                conference: 'Eastern',
+                division: 'Central',
+                founded_year: 1941,
+                arena: 'Little Caesars Arena',
+                head_coach: 'Monty Williams',
+                championships: 3,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/detroit-pistons-vector-logo.png',
+                team_colors: 'Red, White, Blue',
+                description: 'Known for their "Bad Boys" era in the late 1980s and early 1990s with Isiah Thomas and Dennis Rodman.'
+            },
+            {
+                id: 12,
+                team_name: 'Pacers',
+                city: 'Indiana',
+                conference: 'Eastern',
+                division: 'Central',
+                founded_year: 1967,
+                arena: 'Gainbridge Fieldhouse',
+                head_coach: 'Rick Carlisle',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/indiana-pacers-vector-logo.png',
+                team_colors: 'Navy, Gold, White',
+                description: 'Strong franchise with a history of competitive teams, known for their battles with the Bulls and Lakers.'
+            },
+            {
+                id: 13,
+                team_name: 'Bucks',
+                city: 'Milwaukee',
+                conference: 'Eastern',
+                division: 'Central',
+                founded_year: 1968,
+                arena: 'Fiserv Forum',
+                head_coach: 'Adrian Griffin',
+                championships: 2,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/milwaukee-bucks-vector-logo.png',
+                team_colors: 'Green, Cream, Blue',
+                description: 'Recent champions in 2021 led by Giannis Antetokounmpo, also won in 1971 with Kareem Abdul-Jabbar.'
+            },
+            {
+                id: 14,
+                team_name: 'Hawks',
+                city: 'Atlanta',
+                conference: 'Eastern',
+                division: 'Southeast',
+                founded_year: 1946,
+                arena: 'State Farm Arena',
+                head_coach: 'Quin Snyder',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/atlanta-hawks-vector-logo.png',
+                team_colors: 'Red, Black, White',
+                description: 'Historic franchise with exciting young talent led by Trae Young and a strong organizational foundation.'
+            },
+            {
+                id: 15,
+                team_name: 'Hornets',
+                city: 'Charlotte',
+                conference: 'Eastern',
+                division: 'Southeast',
+                founded_year: 1988,
+                arena: 'Spectrum Center',
+                head_coach: 'Steve Clifford',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/charlotte-hornets-vector-logo.png',
+                team_colors: 'Teal, Purple, White',
+                description: 'Expansion team owned by Michael Jordan, known for their unique color scheme and passionate fanbase.'
+            },
+            {
+                id: 16,
+                team_name: 'Magic',
+                city: 'Orlando',
+                conference: 'Eastern',
+                division: 'Southeast',
+                founded_year: 1989,
+                arena: 'Amway Center',
+                head_coach: 'Jamahl Mosley',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/orlando-magic-vector-logo.png',
+                team_colors: 'Blue, Black, Silver',
+                description: "Young franchise with a history of star centers like Shaquille O'Neal and Dwight Howard."
+            },
+            {
+                id: 17,
+                team_name: 'Wizards',
+                city: 'Washington',
+                conference: 'Eastern',
+                division: 'Southeast',
+                founded_year: 1961,
+                arena: 'Capital One Arena',
+                head_coach: 'Wes Unseld Jr.',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/washington-wizards-vector-logo.png',
+                team_colors: 'Navy, Red, White',
+                description: 'Franchise with a rich history, won their championship in 1978 as the Washington Bullets.'
+            },
+            {
+                id: 18,
+                team_name: 'Nuggets',
+                city: 'Denver',
+                conference: 'Western',
+                division: 'Northwest',
+                founded_year: 1967,
+                arena: 'Ball Arena',
+                head_coach: 'Michael Malone',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/denver-nuggets-vector-logo.png',
+                team_colors: 'Navy, Gold, Red',
+                description: 'Recent champions in 2023 led by Nikola Jokić, known for their high-altitude home court advantage.'
+            },
+            {
+                id: 19,
+                team_name: 'Timberwolves',
+                city: 'Minnesota',
+                conference: 'Western',
+                division: 'Northwest',
+                founded_year: 1989,
+                arena: 'Target Center',
+                head_coach: 'Chris Finch',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/minnesota-timberwolves-vector-logo.png',
+                team_colors: 'Blue, Green, Silver',
+                description: 'Young franchise with exciting talent led by Anthony Edwards and Karl-Anthony Towns.'
+            },
+            {
+                id: 20,
+                team_name: 'Thunder',
+                city: 'Oklahoma City',
+                conference: 'Western',
+                division: 'Northwest',
+                founded_year: 1967,
+                arena: 'Paycom Center',
+                head_coach: 'Mark Daigneault',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/oklahoma-city-thunder-vector-logo.png',
+                team_colors: 'Blue, Orange, Navy',
+                description: 'Relocated from Seattle, known for developing young talent and strong organizational culture.'
+            },
+            {
+                id: 21,
+                team_name: 'Blazers',
+                city: 'Portland',
+                conference: 'Western',
+                division: 'Northwest',
+                founded_year: 1970,
+                arena: 'Moda Center',
+                head_coach: 'Chauncey Billups',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/portland-trail-blazers-vector-logo.png',
+                team_colors: 'Red, Black, White',
+                description: 'Passionate fanbase and rich history, won championship in 1977 with Bill Walton.'
+            },
+            {
+                id: 22,
+                team_name: 'Jazz',
+                city: 'Utah',
+                conference: 'Western',
+                division: 'Northwest',
+                founded_year: 1974,
+                arena: 'Delta Center',
+                head_coach: 'Will Hardy',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/utah-jazz-vector-logo.png',
+                team_colors: 'Navy, Yellow, Green',
+                description: 'Known for their legendary duo of John Stockton and Karl Malone in the 1990s.'
+            },
+            {
+                id: 23,
+                team_name: 'Mavericks',
+                city: 'Dallas',
+                conference: 'Western',
+                division: 'Southwest',
+                founded_year: 1980,
+                arena: 'American Airlines Center',
+                head_coach: 'Jason Kidd',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/dallas-mavericks-vector-logo.png',
+                team_colors: 'Blue, Silver, Navy',
+                description: 'Won championship in 2011 with Dirk Nowitzki and currently led by Luka Dončić.'
+            },
+            {
+                id: 24,
+                team_name: 'Rockets',
+                city: 'Houston',
+                conference: 'Western',
+                division: 'Southwest',
+                founded_year: 1967,
+                arena: 'Toyota Center',
+                head_coach: 'Ime Udoka',
+                championships: 2,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/houston-rockets-vector-logo.png',
+                team_colors: 'Red, Black, White',
+                description: 'Won back-to-back championships in 1994 and 1995 with Hakeem Olajuwon.'
+            },
+            {
+                id: 25,
+                team_name: 'Grizzlies',
+                city: 'Memphis',
+                conference: 'Western',
+                division: 'Southwest',
+                founded_year: 1995,
+                arena: 'FedExForum',
+                head_coach: 'Taylor Jenkins',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/memphis-grizzlies-vector-logo.png',
+                team_colors: 'Navy, Blue, Gold',
+                description: 'Young and exciting team known for their "Grit and Grind" mentality and passionate fanbase.'
+            },
+            {
+                id: 26,
+                team_name: 'Pelicans',
+                city: 'New Orleans',
+                conference: 'Western',
+                division: 'Southwest',
+                founded_year: 1988,
+                arena: 'Smoothie King Center',
+                head_coach: 'Willie Green',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/new-orleans-pelicans-vector-logo.png',
+                team_colors: 'Navy, Gold, Red',
+                description: 'Franchise with rising star Zion Williamson and a unique cultural identity in New Orleans.'
+            },
+            {
+                id: 27,
+                team_name: 'Spurs',
+                city: 'San Antonio',
+                conference: 'Western',
+                division: 'Southwest',
+                founded_year: 1967,
+                arena: 'Frost Bank Center',
+                head_coach: 'Gregg Popovich',
+                championships: 5,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/san-antonio-spurs-vector-logo.png',
+                team_colors: 'Black, Silver, White',
+                description: 'Model franchise with five championships and legendary coach Gregg Popovich.'
+            },
+            {
+                id: 28,
+                team_name: 'Kings',
+                city: 'Sacramento',
+                conference: 'Western',
+                division: 'Pacific',
+                founded_year: 1945,
+                arena: 'Golden 1 Center',
+                head_coach: 'Mike Brown',
+                championships: 1,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/sacramento-kings-vector-logo.png',
+                team_colors: 'Purple, Black, Silver',
+                description: 'Historic franchise with passionate fanbase, won championship in 1951 as Rochester Royals.'
+            },
+            {
+                id: 29,
+                team_name: 'Clippers',
+                city: 'Los Angeles',
+                conference: 'Western',
+                division: 'Pacific',
+                founded_year: 1970,
+                arena: 'Crypto.com Arena',
+                head_coach: 'Tyronn Lue',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/los-angeles-clippers-vector-logo.png',
+                team_colors: 'Red, Blue, White',
+                description: 'Share arena with Lakers, known for their "Lob City" era and current championship aspirations.'
+            },
+            {
+                id: 30,
+                team_name: 'Suns',
+                city: 'Phoenix',
+                conference: 'Western',
+                division: 'Pacific',
+                founded_year: 1968,
+                arena: 'Footprint Center',
+                head_coach: 'Frank Vogel',
+                championships: 0,
+                logo_url: 'https://logoeps.com/wp-content/uploads/2013/03/phoenix-suns-vector-logo.png',
+                team_colors: 'Orange, Purple, Black',
+                description: 'Fast-paced, entertaining team with a history of great point guards and recent Finals appearance.'
+            }
+        ];
+
+        // Global variables
+        let filteredTeams = [...nbaTeams];
+        let currentSearch = '';
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                updateStatistics();
+                displayTeams(nbaTeams);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('teams-grid').style.display = 'grid';
+            }, 1000);
+
+            // Add keyboard shortcut for search
+            document.getElementById('search-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    handleSearch();
+                }
+            });
+        });
+
+        // Update statistics
+        function updateStatistics() {
+            const totalTeams = filteredTeams.length;
+            const totalChampionships = filteredTeams.reduce((sum, team) => sum + team.championships, 0);
+            const easternTeams = filteredTeams.filter(team => team.conference === 'Eastern').length;
+            const westernTeams = filteredTeams.filter(team => team.conference === 'Western').length;
+
+            document.getElementById('stat-total').textContent = totalTeams;
+            document.getElementById('stat-championships').textContent = totalChampionships;
+            document.getElementById('stat-eastern').textContent = easternTeams;
+            document.getElementById('stat-western').textContent = westernTeams;
+        }
+
+        // Display teams
+        function displayTeams(teams) {
+            const teamsGrid = document.getElementById('teams-grid');
+            const noResults = document.getElementById('no-results');
+            
+            if (teams.length === 0) {
+                teamsGrid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+            teamsGrid.style.display = 'grid';
+            teamsGrid.innerHTML = '';
+
+            teams.forEach(team => {
+                const teamCard = createTeamCard(team);
+                teamsGrid.appendChild(teamCard);
+            });
+
+            // Add animation
+            setTimeout(() => {
+                const cards = document.querySelectorAll('.team-card');
+                cards.forEach((card, index) => {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.transition = 'all 0.4s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 50);
+        }
+
+        // Create team card HTML
+        function createTeamCard(team) {
+            const card = document.createElement('div');
+            card.className = 'team-card';
+            card.onclick = () => showTeamDetails(team);
+            
+            card.innerHTML = `
+                <div class="team-header">
+                    <div class="team-logo">
+                        <img src="${team.logo_url}" 
+                             alt="${team.team_name} Logo"
+                             onerror="this.src='data:image/svg+xml,<svg xmlns=\\'http://www.w3.org/2000/svg\\' viewBox=\\'0 0 100 100\\'><text y=\\'.9em\\' font-size=\\'90\\'>🏀</text></svg>'">
+                    </div>
+                    <div class="team-name">${team.team_name}</div>
+                    <div class="team-location">${team.city}</div>
+                </div>
+                
+                <div class="team-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Conference:</span>
+                        <span class="detail-value">${team.conference}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Division:</span>
+                        <span class="detail-value">${team.division}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Founded:</span>
+                        <span class="detail-value">${team.founded_year}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Arena:</span>
+                        <span class="detail-value">${team.arena}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Head Coach:</span>
+                        <span class="detail-value">${team.head_coach}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Championships:</span>
+                        <span class="detail-value">
+                            ${team.championships > 0 ? 
+                                `<span class="championships-badge">🏆 ${team.championships}</span>` : 
+                                '0'
+                            }
+                        </span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Team Colors:</span>
+                        <span class="detail-value">${team.team_colors}</span>
+                    </div>
+                    
+                    ${team.description ? `
+                        <div class="team-description">
+                            <strong>About the Team:</strong><br>
+                            ${team.description}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+
+            return card;
+        }
+
+        // Handle search
+        function handleSearch() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            currentSearch = searchTerm;
+            
+            let results = nbaTeams;
+            
+            if (searchTerm) {
+                results = nbaTeams.filter(team => 
+                    team.team_name.toLowerCase().includes(searchTerm) ||
+                    team.city.toLowerCase().includes(searchTerm) ||
+                    team.arena.toLowerCase().includes(searchTerm) ||
+                    team.head_coach.toLowerCase().includes(searchTerm) ||
+                    team.description.toLowerCase().includes(searchTerm) ||
+                    team.conference.toLowerCase().includes(searchTerm) ||
+                    team.division.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            filteredTeams = results;
+            applyFilters();
+            updateResultsInfo();
+        }
+
+        // Apply filters
+        function applyFilters() {
+            let results = currentSearch ? 
+                nbaTeams.filter(team => 
+                    team.team_name.toLowerCase().includes(currentSearch) ||
+                    team.city.toLowerCase().includes(currentSearch) ||
+                    team.arena.toLowerCase().includes(currentSearch) ||
+                    team.head_coach.toLowerCase().includes(currentSearch) ||
+                    team.description.toLowerCase().includes(currentSearch) ||
+                    team.conference.toLowerCase().includes(currentSearch) ||
+                    team.division.toLowerCase().includes(currentSearch)
+                ) : [...nbaTeams];
+
+            // Apply conference filter
+            const conferenceFilter = document.getElementById('conference-filter').value;
+            if (conferenceFilter) {
+                results = results.filter(team => team.conference === conferenceFilter);
+            }
+
+            // Apply division filter
+            const divisionFilter = document.getElementById('division-filter').value;
+            if (divisionFilter) {
+                results = results.filter(team => team.division === divisionFilter);
+            }
+
+            // Apply sorting
+            const sortBy = document.getElementById('sort-filter').value;
+            results.sort((a, b) => {
+                switch (sortBy) {
+                    case 'name':
+                        return a.team_name.localeCompare(b.team_name);
+                    case 'championships':
+                        return b.championships - a.championships || a.team_name.localeCompare(b.team_name);
+                    case 'founded':
+                        return a.founded_year - b.founded_year;
+                    case 'city':
+                        return a.city.localeCompare(b.city);
+                    default:
+                        return a.team_name.localeCompare(b.team_name);
+                }
+            });
+
+            filteredTeams = results;
+            displayTeams(filteredTeams);
+            updateStatistics();
+            updateResultsInfo();
+        }
+
+        // Update results info
+        function updateResultsInfo() {
+            const resultsInfo = document.getElementById('results-info');
+            const resultsTitle = document.getElementById('results-title');
+            const resultsCount = document.getElementById('results-count');
+            
+            const searchTerm = document.getElementById('search-input').value;
+            const conferenceFilter = document.getElementById('conference-filter').value;
+            const divisionFilter = document.getElementById('division-filter').value;
+            
+            if (searchTerm || conferenceFilter || divisionFilter) {
+                resultsInfo.style.display = 'block';
+                
+                if (searchTerm) {
+                    resultsTitle.textContent = `🔍 Search Results for "${searchTerm}"`;
+                } else if (conferenceFilter) {
+                    resultsTitle.textContent = `🏆 ${conferenceFilter} Conference Teams`;
+                } else if (divisionFilter) {
+                    resultsTitle.textContent = `🏅 ${divisionFilter} Division Teams`;
+                }
+                
+                resultsCount.textContent = `${filteredTeams.length} team(s) found`;
+            } else {
+                resultsInfo.style.display = 'none';
+            }
+        }
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('conference-filter').value = '';
+            document.getElementById('division-filter').value = '';
+            document.getElementById('sort-filter').value = 'name';
+            currentSearch = '';
+            filteredTeams = [...nbaTeams];
+            displayTeams(nbaTeams);
+            updateStatistics();
+            updateResultsInfo();
+        }
+
+        // Show team details (modal or alert)
+        function showTeamDetails(team) {
+            alert(`🏀 ${team.team_name} (${team.city})
+            
+📍 Arena: ${team.arena}
+🏆 Championships: ${team.championships}
+👨‍💼 Coach: ${team.head_coach}
+📅 Founded: ${team.founded_year}
+🎨 Colors: ${team.team_colors}
+
+📖 About: ${team.description}`);
+        }
+    </script>
+</body>
+</html> 

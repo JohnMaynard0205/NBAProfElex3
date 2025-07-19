@@ -1,0 +1,26 @@
+# NBA Teams Database - Static Site
+# Group 13 - GitHub Pages Deployment
+
+# Development files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp
+
+# Logs
+*.log
+
+# Node modules (if any future build tools are added)
+node_modules/
+
+# Build outputs (if any future build process is added)
+dist/
+build/ 
