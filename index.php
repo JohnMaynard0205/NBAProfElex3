@@ -2,6 +2,7 @@
 // NBA Teams Database - Main Application
 // Group 13 - NBA Teams
 
+
 // Include required files
 require_once 'config/database.php';
 require_once 'classes/NBATeam.php';
